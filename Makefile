@@ -3,10 +3,10 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: dewalter <dewalter@student.le-101.>        +:+   +:    +:    +:+      #
+#    By: dewalter <dewalter@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/11/22 21:31:56 by dewalter     #+#   ##    ##    #+#        #
-#    Updated: 2017/11/22 22:26:18 by dewalter    ###    #+. /#+    ###.fr      #
+#    Updated: 2020/02/04 14:57:19 by dewalter    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -20,6 +20,9 @@ CC = gcc
 COLOR = echo
 
 CC_FLAGS = -c -Wall -Werror -Wextra
+DIR_INC = ./include/
+DIR_SRC = ./src/
+DIR_OBJ = ./obj/
 
 SRC = ft_atoi.c \
 	  ft_bzero.c \
@@ -86,19 +89,19 @@ SRC = ft_atoi.c \
 	  ft_sort_integer_table.c \
 	  ft_range.c
 
-OBJ = $(SRC:.c=.o)
-
+OBJS = $(addprefix $(DIR_OBJ),$(SRC:.c=.o))
 all: $(NAME)
 
-./%.o: ./%.c
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c $(DIR_INC)
+	@mkdir -p $(DIR_OBJ)
 	@ echo "\033[1mCompilation de \033[33m$<\033[37m en \033[32m$@\033[0m ✅ "
-	@$(CC) $(CC_FLAGS) -o $@ -c $<
+	@$(CC) $(CC_FLAGS) -I $(DIR_INC) -o $@ -c $<
 
-$(NAME): $(OBJ)
-	@ar rcs $(NAME) $(OBJ)
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 clean:
-	@/bin/rm -f $(OBJ)
+	@/bin/rm -rf $(DIR_OBJ)
 
 fclean: clean
 	@/bin/rm -f $(NAME)

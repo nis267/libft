@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_putstr.c                                      .::    .:/ .      .::   */
+/*   ft_putstr_fd.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: dewalter <dewalter@student.le-101.>        +:+   +:    +:    +:+     */
+/*   By: dewalter <dewalter@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/22 21:36:51 by dewalter     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/22 21:36:52 by dewalter    ###    #+. /#+    ###.fr     */
+/*   Created: 2017/11/22 21:36:56 by dewalter     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/04 14:35:46 by dewalter    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(const char *s)
+void	ft_putstr_fd(char const *s, int fd)
 {
-	int i;
-
-	i = 0;
 	if (s != NULL)
-		while (s[i])
-			ft_putchar(s[i++]);
+		write(fd, s, ft_strlen(s));
 }
